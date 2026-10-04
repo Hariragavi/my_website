@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>Admin Dashboard - Citizen Services</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5f8ff,
+            #f8f4ff
+        );
+
+    color: #172033;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   XEIZHI BACKGROUND SHADOW
+===================================================== */
+
+body::after {
+
+    content: "獬豸";
+
+    position: fixed;
+
+    right: -130px;
+    bottom: -100px;
+
+    font-family:
+        "Noto Serif",
+        "Times New Roman",
+        serif;
+
+    font-size: 420px;
+
+    font-weight: 900;
+
+    color:
+        rgba(87, 53, 190, 0.035);
+
+    transform:
+        rotate(-8deg);
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    text-shadow:
+        0 25px 60px
+        rgba(68, 45, 160, 0.08);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+
+    background:
+        linear-gradient(
+            115deg,
+            #0757d8,
+            #4439dc 50%,
+            #7736d4
+        );
+
+    color: white;
+
+    padding:
+        18px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(49,44,150,0.30);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.logo {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: #5936c9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.20);
+}
+
+
+.logo-area h1 {
+
+    font-size: 20px;
+
+}
+
+
+.logo-area p {
+
+    font-size: 12px;
+
+    opacity: 0.9;
+
+}
+
+
+.logout-button {
+
+    border: none;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    color: white;
+
+    padding:
+        10px 18px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.logout-button:hover {
+
+    background:
+        rgba(255,255,255,0.28);
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main {
+
+    width: 90%;
+
+    max-width: 1400px;
+
+    margin:
+        40px auto;
+
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-title {
+
+    margin-bottom: 30px;
+}
+
+
+.page-title h2 {
+
+    color: #193d91;
+
+    font-size: 34px;
+
+    margin-bottom: 8px;
+}
+
+
+.page-title span {
+
+    background:
+        linear-gradient(
+            90deg,
+            #1267df,
+            #7435d5
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+
+}
+
+
+.page-title p {
+
+    color: #68738a;
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+.stat-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    border:
+        1px solid #e1e5f3;
+
+    box-shadow:
+        0 12px 30px
+        rgba(51,57,140,0.09);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: 0.25s;
+}
+
+
+.stat-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 20px 40px
+        rgba(51,57,140,0.14);
+
+}
+
+
+.stat-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1267df,
+            #7435d5
+        );
+}
+
+
+.stat-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.stat-card h3 {
+
+    font-size: 30px;
+
+    color: #263f91;
+
+}
+
+
+.stat-card p {
+
+    color: #68738a;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   CONTROLS
+===================================================== */
+
+.controls {
+
+    background: white;
+
+    border:
+        1px solid #e1e5f3;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(51,57,140,0.08);
+
+}
+
+
+.controls-title {
+
+    font-weight: bold;
+
+    color: #293c72;
+
+    margin-bottom: 15px;
+}
+
+
+.control-row {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        1px solid #ccd4e8;
+
+    border-radius: 9px;
+
+    background: white;
+
+    outline: none;
+
+    font-size: 14px;
+
+}
+
+
+input:focus,
+select:focus {
+
+    border-color:
+        #6939d4;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(105,57,212,0.10);
+
+}
+
+
+/* =====================================================
+   COMPLAINT TABLE
+===================================================== */
+
+.complaints-container {
+
+    background: white;
+
+    border:
+        1px solid #e1e5f3;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(51,57,140,0.09);
+
+    overflow-x: auto;
+}
+
+
+.complaints-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    gap: 15px;
+}
+
+
+.complaints-header h3 {
+
+    color: #263f91;
+
+}
+
+
+.clear-button {
+
+    border: none;
+
+    background: #fff0f2;
+
+    color: #a0183b;
+
+    padding:
+        9px 15px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+
+.clear-button:hover {
+
+    background: #ffe0e6;
+
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 1100px;
+
+}
+
+
+thead {
+
+    background:
+        linear-gradient(
+            100deg,
+            #eef5ff,
+            #f3edff
+        );
+
+}
+
+
+th {
+
+    text-align: left;
+
+    padding: 15px 12px;
+
+    color: #344783;
+
+    font-size: 13px;
+
+}
+
+
+td {
+
+    padding: 15px 12px;
+
+    border-bottom:
+        1px solid #edf0f7;
+
+    font-size: 13px;
+
+    color: #4f5b72;
+
+    vertical-align: top;
+
+}
+
+
+tr:hover td {
+
+    background:
+        #fafbff;
+
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding:
+        6px 11px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+.status-submitted {
+
+    background: #e9f2ff;
+
+    color: #1761c9;
+
+}
+
+
+.status-review {
+
+    background: #fff5d9;
+
+    color: #a36a00;
+
+}
+
+
+.status-progress {
+
+    background: #eee8ff;
+
+    color: #6535c1;
+
+}
+
+
+.status-resolved {
+
+    background: #e4f8ed;
+
+    color: #19804c;
+
+}
+
+
+.status-rejected {
+
+    background: #ffe8ed;
+
+    color: #a51f42;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.action-select {
+
+    min-width: 140px;
+
+    padding: 8px;
+
+    font-size: 12px;
+}
+
+
+.note-button {
+
+    border: none;
+
+    background:
+        linear-gradient(
+            110deg,
+            #1267df,
+            #7036d4
+        );
+
+    color: white;
+
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    margin-top: 7px;
+
+}
+
+
+.delete-button {
+
+    border: none;
+
+    background: #fff0f2;
+
+    color: #a0183b;
+
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    margin-top: 7px;
+
+}
+
+
+.note-button:hover {
+
+    opacity: 0.85;
+
+}
+
+
+.delete-button:hover {
+
+    background: #ffe0e6;
+
+}
+
+
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    display: none;
+}
+
+
+.empty-icon {
+
+    font-size: 65px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.empty-state h3 {
+
+    color: #354c91;
+
+    margin-bottom: 8px;
+
+}
+
+
+.empty-state p {
+
+    color: #758096;
+
+}
+
+
+/* =====================================================
+   NOTE MODAL
+===================================================== */
+
+.modal {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(18,25,55,0.55);
+
+    backdrop-filter:
+        blur(5px);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 500;
+}
+
+
+.modal-box {
+
+    width: 100%;
+
+    max-width: 550px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,0.25);
+
+}
+
+
+.modal-box h3 {
+
+    color: #263f91;
+
+    margin-bottom: 8px;
+
+}
+
+
+.modal-box p {
+
+    color: #68738a;
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.modal-box textarea {
+
+    width: 100%;
+
+    min-height: 130px;
+
+    resize: vertical;
+
+    border:
+        1px solid #ccd4e8;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    outline: none;
+
+}
+
+
+.modal-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+.save-note {
+
+    flex: 1;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            110deg,
+            #1267df,
+            #7036d4
+        );
+
+    color: white;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+.close-modal {
+
+    flex: 1;
+
+    border: none;
+
+    background: #eef0f6;
+
+    color: #46516a;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    margin-top: 50px;
+
+    background:
+        linear-gradient(
+            115deg,
+            #0a459d,
+            #4c2ca7,
+            #7131bb
+        );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 35px;
+
+}
+
+
+footer p {
+
+    font-size: 13px;
+
+    opacity: 0.9;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width: 1000px) {
+
+    .stats {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .control-row {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+@media(max-width: 600px) {
+
+    main {
+
+        width: 94%;
+
+    }
+
+    header {
+
+        padding:
+            15px 4%;
+
+    }
+
+    .logo-area h1 {
+
+        font-size: 16px;
+
+    }
+
+    .page-title h2 {
+
+        font-size: 27px;
+
+    }
+
+    .stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .complaints-container {
+
+        padding: 15px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+```
+<div class="logo-area">
+
+    <div class="logo">
+        ✓
+    </div>
+
+    <div>
+
+        <h1>
+            Citizen Services
+        </h1>
+
+        <p>
+            Administrator Dashboard
+        </p>
+
+    </div>
+
+</div>
+
+
+<button
+    class="logout-button"
+    onclick="goToWebsite()"
+>
+
+    ← Back to Website
+
+</button>
+```
+
+</header>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+```
+<div class="page-title">
+
+    <h2>
+
+        Admin
+        <span>
+            Dashboard
+        </span>
+
+    </h2>
+
+    <p>
+        Manage citizen complaints and monitor their progress.
+    </p>
+
+</div>
+
+
+<!-- =================================================
+     STATISTICS
+================================================= -->
+
+<div class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📋
+        </div>
+
+        <h3 id="totalCount">
+            0
+        </h3>
+
+        <p>
+            Total Complaints
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🔍
+        </div>
+
+        <h3 id="reviewCount">
+            0
+        </h3>
+
+        <p>
+            Under Review
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🔧
+        </div>
+
+        <h3 id="progressCount">
+            0
+        </h3>
+
+        <p>
+            In Progress
+        </p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            ✅
+        </div>
+
+        <h3 id="resolvedCount">
+            0
+        </h3>
+
+        <p>
+            Resolved
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<!-- =================================================
+     SEARCH / FILTER
+================================================= -->
+
+<div class="controls">
+
+    <div class="controls-title">
+        Search and Filter Complaints
+    </div>
+
+
+    <div class="control-row">
+
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by complaint ID, name, location..."
+            oninput="displayComplaints()"
+        >
+
+
+        <select
+            id="categoryFilter"
+            onchange="displayComplaints()"
+        >
+
+            <option value="All">
+                All Categories
+            </option>
+
+            <option value="Street Light">
+                Street Light
+            </option>
+
+            <option value="Water Pipe Leak">
+                Water Pipe Leak
+            </option>
+
+            <option value="Rain Water Drainage">
+                Rain Water Drainage
+            </option>
+
+            <option value="Road Problem">
+                Road Problem
+            </option>
+
+            <option value="Other">
+                Other
+            </option>
+
+        </select>
+
+
+        <select
+            id="statusFilter"
+            onchange="displayComplaints()"
+        >
+
+            <option value="All">
+                All Statuses
+            </option>
+
+            <option value="Submitted">
+                Submitted
+            </option>
+
+            <option value="Under Review">
+                Under Review
+            </option>
+
+            <option value="In Progress">
+                In Progress
+            </option>
+
+            <option value="Resolved">
+                Resolved
+            </option>
+
+            <option value="Rejected">
+                Rejected
+            </option>
+
+        </select>
+
+
+    </div>
+
+</div>
+
+
+<!-- =================================================
+     COMPLAINTS
+================================================= -->
+
+<div class="complaints-container">
+
+
+    <div class="complaints-header">
+
+        <h3>
+            Complaint Records
+        </h3>
+
+
+        <button
+            class="clear-button"
+            onclick="clearAllComplaints()"
+        >
+
+            Delete All
+
+        </button>
+
+    </div>
+
+
+    <div id="tableWrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Complaint ID
+                    </th>
+
+                    <th>
+                        Citizen
+                    </th>
+
+                    <th>
+                        Category
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Description
+                    </th>
+
+                    <th>
+                        Priority
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody
+                id="complaintTable"
+            ></tbody>
+
+        </table>
+
+    </div>
+
+
+    <div
+        class="empty-state"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">
+            📭
+        </div>
+
+        <h3>
+            No Complaints Found
+        </h3>
+
+        <p>
+            Complaints submitted through the citizen website
+            will appear here.
+        </p>
+
+    </div>
+
+
+</div>
+```
+
+</main>
+
+<!-- =====================================================
+     NOTE MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="noteModal"
+>
+
+```
+<div class="modal-box">
+
+    <h3>
+        Administrator Note
+    </h3>
+
+    <p>
+        Add a note about the progress or action taken
+        for this complaint.
+    </p>
+
+
+    <textarea
+        id="noteInput"
+        placeholder="Example: Repair team has been assigned..."
+    ></textarea>
+
+
+    <div class="modal-buttons">
+
+        <button
+            class="save-note"
+            onclick="saveNote()"
+        >
+
+            Save Note
+
+        </button>
+
+
+        <button
+            class="close-modal"
+            onclick="closeModal()"
+        >
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+```
+<p>
+    Citizen Complaint Management System
+</p>
+
+<p>
+    Administrator Panel • 2026
+</p>
+```
+
+</footer>
+
+<script>
+
+
+/* =====================================================
+   GET COMPLAINTS
+===================================================== */
+
+function getComplaints() {
+
+    return JSON.parse(
+
+        localStorage.getItem(
+            "citizenComplaints"
+        ) || "[]"
+
+    );
+
+}
+
+
+/* =====================================================
+   SAVE COMPLAINTS
+===================================================== */
+
+function saveComplaints(complaints) {
+
+    localStorage.setItem(
+
+        "citizenComplaints",
+
+        JSON.stringify(complaints)
+
+    );
+
+}
+
+
+/* =====================================================
+   DISPLAY COMPLAINTS
+===================================================== */
+
+function displayComplaints() {
+
+
+    const complaints =
+        getComplaints();
+
+
+    const table =
+        document.getElementById(
+            "complaintTable"
+        );
+
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    const tableWrapper =
+        document.getElementById(
+            "tableWrapper"
+        );
+
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document
+            .getElementById(
+                "categoryFilter"
+            )
+            .value;
+
+
+    const status =
+        document
+            .getElementById(
+                "statusFilter"
+            )
+            .value;
+
+
+    const filtered =
+        complaints.filter(
+
+            function(complaint) {
+
+
+                const searchableText =
+
+                    (
+
+                        complaint.id +
+
+                        " " +
+
+                        complaint.name +
+
+                        " " +
+
+                        complaint.location +
+
+                        " " +
+
+                        complaint.category
+
+                    )
+                    .toLowerCase();
+
+
+                const matchesSearch =
+                    searchableText
+                        .includes(search);
+
+
+                const matchesCategory =
+
+                    category === "All" ||
+
+                    complaint.category ===
+                    category;
+
+
+                const matchesStatus =
+
+                    status === "All" ||
+
+                    complaint.status ===
+                    status;
+
+
+                return (
+
+                    matchesSearch &&
+
+                    matchesCategory &&
+
+                    matchesStatus
+
+                );
+
+            }
+
+        );
+
+
+    table.innerHTML = "";
+
+
+    if (
+        filtered.length === 0
+    ) {
+
+        tableWrapper.style.display =
+            "none";
+
+        emptyState.style.display =
+            "block";
+
+    }
+
+    else {
+
+        tableWrapper.style.display =
+            "block";
+
+        emptyState.style.display =
+            "none";
+
+
+        filtered
+            .slice()
+            .reverse()
+            .forEach(
+
+                function(complaint) {
+
+                    addComplaintRow(
+                        complaint
+                    );
+
+                }
+
+            );
+
+    }
+
+
+    updateStatistics(
+        complaints
+    );
+
+}
+
+
+/* =====================================================
+   ADD ROW
+===================================================== */
+
+function addComplaintRow(
+    complaint
+) {
+
+
+    const table =
+        document.getElementById(
+            "complaintTable"
+        );
+
+
+    const row =
+        document.createElement(
+            "tr"
+        );
+
+
+    const statusClass =
+        getStatusClass(
+            complaint.status
+        );
+
+
+    const categoryName =
+
+        complaint.category === "Other"
+
+            ?
+
+            complaint.category +
+            (
+                complaint.otherProblem
+                    ?
+                    "<br><small>" +
+                    escapeHTML(
+                        complaint.otherProblem
+                    ) +
+                    "</small>"
+                    :
+                    ""
+            )
+
+            :
+
+            complaint.category;
+
+
+    row.innerHTML = `
+
+        <td>
+
+            <strong>
+                ${escapeHTML(
+                    complaint.id
+                )}
+            </strong>
+
+            <br>
+
+            <small>
+                ${formatDate(
+                    complaint.created
+                )}
+            </small>
+
+        </td>
+
+
+        <td>
+
+            <strong>
+                ${escapeHTML(
+                    complaint.name
+                )}
+            </strong>
+
+            <br>
+
+            <small>
+                ${escapeHTML(
+                    complaint.mobile
+                )}
+            </small>
+
+        </td>
+
+
+        <td>
+
+            ${categoryName}
+
+        </td>
+
+
+        <td>
+
+            ${escapeHTML(
+                complaint.location
+            )}
+
+        </td>
+
+
+        <td>
+
+            ${escapeHTML(
+                complaint.description
+            )}
+
+        </td>
+
+
+        <td>
+
+            ${escapeHTML(
+                complaint.priority
+            )}
+
+        </td>
+
+
+        <td>
+
+            <span
+                class="status-badge ${statusClass}"
+            >
+
+                ${escapeHTML(
+                    complaint.status
+                )}
+
+            </span>
+
+        </td>
+
+
+        <td>
+
+            <select
+                class="action-select"
+                onchange="changeStatus(
+                    '${complaint.id}',
+                    this.value
+                )"
+            >
+
+                <option
+                    value="Submitted"
+                    ${complaint.status === "Submitted" ? "selected" : ""}
+                >
+                    Submitted
+                </option>
+
+                <option
+                    value="Under Review"
+                    ${complaint.status === "Under Review" ? "selected" : ""}
+                >
+                    Under Review
+                </option>
+
+                <option
+                    value="In Progress"
+                    ${complaint.status === "In Progress" ? "selected" : ""}
+                >
+                    In Progress
+                </option>
+
+                <option
+                    value="Resolved"
+                    ${complaint.status === "Resolved" ? "selected" : ""}
+                >
+                    Resolved
+                </option>
+
+                <option
+                    value="Rejected"
+                    ${complaint.status === "Rejected" ? "selected" : ""}
+                >
+                    Rejected
+                </option>
+
+            </select>
+
+
+            <br>
+
+
+            <button
+                class="note-button"
+                onclick="openNoteModal(
+                    '${complaint.id}'
+                )"
+            >
+
+                📝 Note
+
+            </button>
+
+
+            <br>
+
+
+            <button
+                class="delete-button"
+                onclick="deleteComplaint(
+                    '${complaint.id}'
+                )"
+            >
+
+                🗑 Delete
+
+            </button>
+
+        </td>
+
+    `;
+
+
+    table.appendChild(row);
+
+}
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function getStatusClass(status) {
+
+
+    if (
+        status === "Submitted"
+    ) {
+
+        return "status-submitted";
+
+    }
+
+
+    if (
+        status === "Under Review"
+    ) {
+
+        return "status-review";
+
+    }
+
+
+    if (
+        status === "In Progress"
+    ) {
+
+        return "status-progress";
+
+    }
+
+
+    if (
+        status === "Resolved"
+    ) {
+
+        return "status-resolved";
+
+    }
+
+
+    if (
+        status === "Rejected"
+    ) {
+
+        return "status-rejected";
+
+    }
+
+
+    return "status-submitted";
+
+}
+
+
+/* =====================================================
+   CHANGE STATUS
+===================================================== */
+
+function changeStatus(
+    complaintID,
+    newStatus
+) {
+
+
+    const complaints =
+        getComplaints();
+
+
+    const complaint =
+        complaints.find(
+
+            function(item) {
+
+                return (
+                    item.id ===
+                    complaintID
+                );
+
+            }
+
+        );
+
+
+    if (!complaint) {
+
+        return;
+
+    }
+
+
+    complaint.status =
+        newStatus;
+
+
+    if (
+        newStatus ===
+        "Submitted"
+    ) {
+
+        complaint.note =
+            "Your complaint has been received and is waiting for review.";
+
+    }
+
+
+    else if (
+        newStatus ===
+        "Under Review"
+    ) {
+
+        complaint.note =
+            "Your complaint is currently being reviewed by the concerned department.";
+
+    }
+
+
+    else if (
+        newStatus ===
+        "In Progress"
+    ) {
+
+        complaint.note =
+            "Action has been initiated. The concerned team is working on the issue.";
+
+    }
+
+
+    else if (
+        newStatus ===
+        "Resolved"
+    ) {
+
+        complaint.note =
+            "The reported problem has been resolved.";
+
+    }
+
+
+    else if (
+        newStatus ===
+        "Rejected"
+    ) {
+
+        complaint.note =
+            "The complaint has been rejected by the administrator.";
+
+    }
+
+
+    saveComplaints(
+        complaints
+    );
+
+
+    displayComplaints();
+
+}
+
+
+/* =====================================================
+   OPEN NOTE MODAL
+===================================================== */
+
+let selectedComplaintID =
+    null;
+
+
+function openNoteModal(
+    complaintID
+) {
+
+
+    selectedComplaintID =
+        complaintID;
+
+
+    const complaints =
+        getComplaints();
+
+
+    const complaint =
+        complaints.find(
+
+            function(item) {
+
+                return (
+                    item.id ===
+                    complaintID
+                );
+
+            }
+
+        );
+
+
+    if (!complaint) {
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "noteInput"
+        )
+        .value =
+        complaint.note || "";
+
+
+    document
+        .getElementById(
+            "noteModal"
+        )
+        .style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   SAVE NOTE
+===================================================== */
+
+function saveNote() {
+
+
+    if (
+        !selectedComplaintID
+    ) {
+
+        return;
+
+    }
+
+
+    const note =
+        document
+            .getElementById(
+                "noteInput"
+            )
+            .value
+            .trim();
+
+
+    const complaints =
+        getComplaints();
+
+
+    const complaint =
+        complaints.find(
+
+            function(item) {
+
+                return (
+                    item.id ===
+                    selectedComplaintID
+                );
+
+            }
+
+        );
+
+
+    if (!complaint) {
+
+        return;
+
+    }
+
+
+    complaint.note =
+        note;
+
+
+    saveComplaints(
+        complaints
+    );
+
+
+    closeModal();
+
+
+    displayComplaints();
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeModal() {
+
+    document
+        .getElementById(
+            "noteModal"
+        )
+        .style.display =
+        "none";
+
+
+    selectedComplaintID =
+        null;
+
+}
+
+
+/* =====================================================
+   DELETE COMPLAINT
+===================================================== */
+
+function deleteComplaint(
+    complaintID
+) {
+
+
+    const confirmation =
+        confirm(
+            "Are you sure you want to delete this complaint?"
+        );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    let complaints =
+        getComplaints();
+
+
+    complaints =
+        complaints.filter(
+
+            function(item) {
+
+                return (
+                    item.id !==
+                    complaintID
+                );
+
+            }
+
+        );
+
+
+    saveComplaints(
+        complaints
+    );
+
+
+    displayComplaints();
+
+}
+
+
+/* =====================================================
+   DELETE ALL
+===================================================== */
+
+function clearAllComplaints() {
+
+
+    const complaints =
+        getComplaints();
+
+
+    if (
+        complaints.length === 0
+    ) {
+
+        alert(
+            "There are no complaints to delete."
+        );
+
+        return;
+
+    }
+
+
+    const confirmation =
+        confirm(
+
+            "WARNING: This will permanently delete ALL complaints from this browser. Continue?"
+
+        );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "citizenComplaints"
+    );
+
+
+    displayComplaints();
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function updateStatistics(
+    complaints
+) {
+
+
+    document
+        .getElementById(
+            "totalCount"
+        )
+        .textContent =
+        complaints.length;
+
+
+    document
+        .getElementById(
+            "reviewCount"
+        )
+        .textContent =
+
+        complaints.filter(
+
+            function(item) {
+
+                return (
+                    item.status ===
+                    "Under Review"
+                );
+
+            }
+
+        ).length;
+
+
+    document
+        .getElementById(
+            "progressCount"
+        )
+        .textContent =
+
+        complaints.filter(
+
+            function(item) {
+
+                return (
+                    item.status ===
+                    "In Progress"
+                );
+
+            }
+
+        ).length;
+
+
+    document
+        .getElementById(
+            "resolvedCount"
+        )
+        .textContent =
+
+        complaints.filter(
+
+            function(item) {
+
+                return (
+                    item.status ===
+                    "Resolved"
+                );
+
+            }
+
+        ).length;
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(
+    date
+) {
+
+
+    if (!date) {
+
+        return "";
+
+    }
+
+
+    const d =
+        new Date(date);
+
+
+    return d.toLocaleDateString();
+
+}
+
+
+/* =====================================================
+   SECURITY HELPER
+===================================================== */
+
+function escapeHTML(
+    text
+) {
+
+
+    if (!text) {
+
+        return "";
+
+    }
+
+
+    return text
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   BACK TO CITIZEN WEBSITE
+===================================================== */
+
+function goToWebsite() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+/* =====================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+===================================================== */
+
+document
+    .getElementById(
+        "noteModal"
+    )
+    .addEventListener(
+
+        "click",
+
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+
+    );
+
+
+/* =====================================================
+   LOAD DASHBOARD
+===================================================== */
+
+displayComplaints();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2659 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Citizen Complaint Management System</title>
+
+<style>
+
+/* =========================================================
+   BASIC RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f7f9ff;
+    color: #172033;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   XEIZHI BACKGROUND SHADOW
+   Large, subtle and decorative
+========================================================= */
+
+body::after {
+    content: "獬豸";
+
+    position: fixed;
+
+    right: -120px;
+    bottom: -80px;
+
+    width: 600px;
+    height: 600px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: "Noto Serif", "Times New Roman", serif;
+
+    font-size: 300px;
+    font-weight: 900;
+
+    color: rgba(82, 57, 190, 0.035);
+
+    transform: rotate(-8deg);
+
+    pointer-events: none;
+
+    z-index: -2;
+
+    filter: blur(0.3px);
+
+    text-shadow:
+        0 25px 60px rgba(68, 45, 160, 0.08);
+}
+
+
+/* =========================================================
+   BACKGROUND LIGHT
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: -3;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(34, 113, 240, 0.13),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 90% 15%,
+            rgba(126, 52, 220, 0.13),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(0, 174, 255, 0.07),
+            transparent 30%
+        );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    background:
+        linear-gradient(
+            115deg,
+            #0757d8,
+            #4439dc 50%,
+            #7736d4
+        );
+
+    color: white;
+
+    padding: 18px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        0 10px 35px
+        rgba(49, 44, 150, 0.30);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.logo {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: white;
+
+    color: #5936c9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.20);
+}
+
+.logo-area h1 {
+    font-size: 20px;
+}
+
+.logo-area p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+
+    background:
+        rgba(255,255,255,0.94);
+
+    backdrop-filter: blur(12px);
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    padding: 14px;
+
+    border-bottom:
+        1px solid #e0e5f5;
+
+    position: sticky;
+
+    top: 84px;
+
+    z-index: 90;
+}
+
+nav a {
+
+    text-decoration: none;
+
+    color: #33489c;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+nav a:hover {
+    color: #7436d3;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 550px;
+
+    padding: 80px 7%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf5ff,
+            #ffffff 45%,
+            #f5edff
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border-radius: 50%;
+
+    right: -180px;
+
+    top: -200px;
+
+    background:
+        rgba(105, 66, 220, 0.12);
+
+    filter: blur(5px);
+}
+
+.hero-content {
+
+    max-width: 720px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.eyebrow {
+
+    color: #6637d2;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.hero h2 {
+
+    font-size: 48px;
+
+    line-height: 1.15;
+
+    color: #183b8e;
+
+    margin-bottom: 20px;
+}
+
+.gradient-text {
+
+    background:
+        linear-gradient(
+            90deg,
+            #1466df,
+            #7435d4
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+.hero p {
+
+    font-size: 17px;
+
+    color: #58647a;
+
+    margin-bottom: 30px;
+
+    max-width: 650px;
+}
+
+.primary-button {
+
+    display: inline-block;
+
+    padding: 14px 26px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            115deg,
+            #0865df,
+            #6536d5
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 28px
+        rgba(62,61,190,0.30);
+
+    transition: 0.25s;
+}
+
+.primary-button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(62,61,190,0.35);
+}
+
+
+/* =========================================================
+   REPAIR SYMBOL
+========================================================= */
+
+.repair-symbol {
+
+    width: 270px;
+
+    height: 270px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #eeeaff
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 105px;
+
+    border: 8px solid white;
+
+    box-shadow:
+
+        0 30px 70px
+        rgba(73,53,180,0.25),
+
+        0 0 0 20px
+        rgba(90,60,200,0.05);
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+@keyframes floating {
+
+    50% {
+
+        transform:
+            translateY(-10px);
+
+        box-shadow:
+
+            0 38px 80px
+            rgba(73,53,180,0.30),
+
+            0 0 0 28px
+            rgba(90,60,200,0.04);
+    }
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+section {
+    padding: 75px 7%;
+}
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+
+    color: #173b8f;
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
+}
+
+.section-title p {
+    color: #68738a;
+}
+
+
+/* =========================================================
+   COMPLAINT CATEGORIES
+========================================================= */
+
+.categories {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 18px;
+
+    max-width: 1250px;
+
+    margin: auto;
+}
+
+.category-card {
+
+    border:
+        1px solid #e0e4f4;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 18px;
+
+    padding: 28px 18px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 9px 25px
+        rgba(48,52,140,0.08);
+
+    position: relative;
+
+    overflow: hidden;
+
+    color: inherit;
+}
+
+.category-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1972e8,
+            #7936d4
+        );
+
+    transform:
+        scaleX(0.2);
+
+    transform-origin: left;
+
+    transition: 0.3s;
+}
+
+.category-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 22px 45px
+        rgba(58,52,155,0.16);
+
+    border-color:
+        #cbc4f7;
+}
+
+.category-card:hover::before {
+    transform: scaleX(1);
+}
+
+.category-card:active {
+
+    transform:
+        translateY(-3px)
+        scale(0.98);
+}
+
+.category-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin:
+        auto auto 18px;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e5f1ff,
+            #eee7ff
+        );
+
+    box-shadow:
+        0 10px 22px
+        rgba(75,63,170,0.12);
+}
+
+.category-card h3 {
+
+    color: #314b9d;
+
+    margin-bottom: 10px;
+}
+
+.category-card p {
+
+    color: #68738a;
+
+    font-size: 14px;
+
+    min-height: 70px;
+}
+
+.select-text {
+
+    display: block;
+
+    margin-top: 15px;
+
+    color: #6637ce;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.form-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8f9ff,
+            #f3f0ff
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.form-section::after {
+
+    content: "獬豸";
+
+    position: absolute;
+
+    left: -180px;
+
+    bottom: -120px;
+
+    font-family:
+        "Noto Serif",
+        "Times New Roman",
+        serif;
+
+    font-size: 420px;
+
+    font-weight: 900;
+
+    color:
+        rgba(31,91,205,0.025);
+
+    transform:
+        rotate(8deg);
+
+    pointer-events: none;
+}
+
+.form-container {
+
+    max-width: 950px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 38px;
+
+    border-radius: 20px;
+
+    border:
+        1px solid #e0e4f5;
+
+    box-shadow:
+        0 20px 50px
+        rgba(57,52,150,0.10);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #273653;
+
+    margin-bottom: 7px;
+}
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border:
+        1px solid #ccd4e8;
+
+    border-radius: 9px;
+
+    background: white;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color:
+        #6939d4;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(105,57,212,0.10);
+}
+
+textarea {
+
+    min-height: 140px;
+
+    resize: vertical;
+}
+
+
+/* =========================================================
+   OTHER PROBLEM
+========================================================= */
+
+#otherProblemBox {
+
+    display: none;
+
+    padding: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f8ff,
+            #f6efff
+        );
+
+    border:
+        1px solid #d9d0ff;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.submit-button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #0864df,
+            #6636d3
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 25px
+        rgba(65,57,190,0.25);
+
+    transition: 0.25s;
+}
+
+.submit-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 17px 35px
+        rgba(65,57,190,0.30);
+}
+
+
+/* =========================================================
+   SUCCESS BOX
+========================================================= */
+
+.success-box {
+
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 28px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff8ff,
+            #f4edff
+        );
+
+    border:
+        1px solid #d6ceff;
+
+    text-align: center;
+
+    box-shadow:
+        0 15px 35px
+        rgba(76,58,174,0.12);
+}
+
+.success-icon {
+
+    width: 70px;
+
+    height: 70px;
+
+    margin:
+        auto auto 15px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1670e6,
+            #7436d2
+        );
+
+    color: white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(65,61,190,0.25);
+}
+
+.success-box h3 {
+
+    color: #4930a5;
+
+    margin-bottom: 10px;
+}
+
+.complaint-number {
+
+    display: inline-block;
+
+    margin: 10px 0;
+
+    padding: 10px 20px;
+
+    background: white;
+
+    color: #1761d2;
+
+    border-radius: 10px;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(52,65,180,0.12);
+}
+
+
+/* =========================================================
+   TRACKING
+========================================================= */
+
+.tracking-section {
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf5ff,
+            #f6efff
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.tracking-section::before {
+
+    content: "獬豸";
+
+    position: absolute;
+
+    right: -150px;
+
+    top: 50px;
+
+    font-family:
+        "Noto Serif",
+        "Times New Roman",
+        serif;
+
+    font-size: 400px;
+
+    font-weight: 900;
+
+    color:
+        rgba(91,52,190,0.025);
+
+    transform:
+        rotate(-10deg);
+
+    pointer-events: none;
+}
+
+.tracking-container {
+
+    max-width: 800px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(57,52,150,0.10);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.tracking-input {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.tracking-input input {
+    flex: 1;
+}
+
+.track-button {
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            110deg,
+            #1267df,
+            #7036d4
+        );
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   TRACKING RESULT
+========================================================= */
+
+.tracking-result {
+
+    display: none;
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fafcff,
+            #f7f1ff
+        );
+
+    border:
+        1px solid #ddd5ff;
+}
+
+.tracking-result h3 {
+
+    color: #4930a5;
+
+    margin-bottom: 15px;
+}
+
+.tracking-result p {
+    margin: 8px 0;
+}
+
+.status {
+
+    display: inline-block;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    background:
+        #e8e2ff;
+
+    color: #5732ad;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.progress-container {
+    margin-top: 25px;
+}
+
+.progress-bar {
+
+    width: 100%;
+
+    height: 10px;
+
+    background: #e4e7f1;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+
+    height: 100%;
+
+    width: 25%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1471e5,
+            #7435d5
+        );
+
+    border-radius: 20px;
+
+    transition:
+        width 0.5s;
+}
+
+.progress-labels {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 11px;
+
+    color: #7a8192;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-box {
+
+    display: none;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #fff0f2;
+
+    color: #a0183b;
+
+    border:
+        1px solid #ffc8d2;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    background:
+        linear-gradient(
+            115deg,
+            #0a459d,
+            #4c2ca7,
+            #7131bb
+        );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 40px 7%;
+}
+
+footer h3 {
+    margin-bottom: 8px;
+}
+
+footer p {
+
+    font-size: 13px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1100px) {
+
+    .categories {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+@media(max-width: 800px) {
+
+    .hero {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero h2 {
+        font-size: 38px;
+    }
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+    }
+
+    .tracking-input {
+
+        flex-direction: column;
+    }
+}
+
+
+@media(max-width: 600px) {
+
+    nav {
+
+        gap: 15px;
+
+        flex-wrap: wrap;
+
+        top: 82px;
+    }
+
+    .categories {
+
+        grid-template-columns: 1fr;
+    }
+
+    section {
+
+        padding:
+            55px 5%;
+    }
+
+    .form-container,
+    .tracking-container {
+
+        padding: 22px;
+    }
+
+    .hero {
+
+        padding:
+            55px 5%;
+    }
+
+    .hero h2 {
+        font-size: 31px;
+    }
+
+    .repair-symbol {
+
+        width: 190px;
+
+        height: 190px;
+
+        font-size: 75px;
+    }
+
+}
+
+
+/* =========================================================
+   XEIZHI SHADOW ON SMALL SCREENS
+========================================================= */
+
+@media(max-width: 600px) {
+
+    body::after {
+
+        right: -160px;
+
+        bottom: -80px;
+
+        font-size: 220px;
+
+        opacity: 0.7;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+
+```
+<div class="logo-area">
+
+    <div class="logo">
+        ✓
+    </div>
+
+    <div>
+
+        <h1>
+            Citizen Services
+        </h1>
+
+        <p>
+            Online Complaint Management System
+        </p>
+
+    </div>
+
+</div>
+```
+
+</header>
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+```
+<a href="#home">
+    Home
+</a>
+
+<a href="#categories">
+    Complaint Categories
+</a>
+
+<a href="#register">
+    Register Complaint
+</a>
+
+<a href="#tracking">
+    Track Complaint
+</a>
+```
+
+</nav>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+```
+<div class="hero-content">
+
+    <div class="eyebrow">
+        PUBLIC SERVICE PORTAL
+    </div>
+
+    <h2>
+
+        Report Public Problems.
+
+        <br>
+
+        <span class="gradient-text">
+            Get Them Resolved.
+        </span>
+
+    </h2>
+
+    <p>
+
+        Easily report problems related to
+        street lights, water pipes, rain water
+        drainage, roads and other public
+        infrastructure.
+
+    </p>
+
+    <a
+        href="#categories"
+        class="primary-button"
+    >
+
+        Register a Complaint
+
+    </a>
+
+</div>
+
+
+<div class="repair-symbol">
+    🔧
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     CATEGORIES
+========================================================= -->
+
+<section id="categories">
+
+```
+<div class="section-title">
+
+    <h2>
+
+        Complaint
+
+        <span class="gradient-text">
+            Categories
+        </span>
+
+    </h2>
+
+    <p>
+        Select the option that best describes the problem.
+    </p>
+
+</div>
+
+
+<div class="categories">
+
+
+    <button
+        class="category-card"
+        onclick="selectCategory('Street Light')"
+    >
+
+        <div class="category-icon">
+            💡
+        </div>
+
+        <h3>
+            Street Light
+        </h3>
+
+        <p>
+            Report damaged, broken or non-working
+            street lights.
+        </p>
+
+        <span class="select-text">
+            Click to select
+        </span>
+
+    </button>
+
+
+    <button
+        class="category-card"
+        onclick="selectCategory('Water Pipe Leak')"
+    >
+
+        <div class="category-icon">
+            💧
+        </div>
+
+        <h3>
+            Water Pipe Leak
+        </h3>
+
+        <p>
+            Report leaking or damaged water supply
+            pipes.
+        </p>
+
+        <span class="select-text">
+            Click to select
+        </span>
+
+    </button>
+
+
+    <button
+        class="category-card"
+        onclick="selectCategory('Rain Water Drainage')"
+    >
+
+        <div class="category-icon">
+            🌧️
+        </div>
+
+        <h3>
+            Rain Water Drainage
+        </h3>
+
+        <p>
+            Report blocked or damaged drainage
+            systems.
+        </p>
+
+        <span class="select-text">
+            Click to select
+        </span>
+
+    </button>
+
+
+    <button
+        class="category-card"
+        onclick="selectCategory('Road Problem')"
+    >
+
+        <div class="category-icon">
+            🛣️
+        </div>
+
+        <h3>
+            Road Problem
+        </h3>
+
+        <p>
+            Report potholes, damaged roads or unsafe
+            road surfaces.
+        </p>
+
+        <span class="select-text">
+            Click to select
+        </span>
+
+    </button>
+
+
+    <button
+        class="category-card"
+        onclick="selectCategory('Other')"
+    >
+
+        <div class="category-icon">
+            📋
+        </div>
+
+        <h3>
+            Other
+        </h3>
+
+        <p>
+            Report another public infrastructure
+            problem not listed above.
+        </p>
+
+        <span class="select-text">
+            Click to select
+        </span>
+
+    </button>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     COMPLAINT FORM
+========================================================= -->
+
+<section
+    class="form-section"
+    id="register"
+>
+
+```
+<div class="section-title">
+
+    <h2>
+
+        Register a
+
+        <span class="gradient-text">
+            Complaint
+        </span>
+
+    </h2>
+
+    <p>
+        Fill in the details below to submit your complaint.
+    </p>
+
+</div>
+
+
+<div class="form-container">
+
+
+    <form id="complaintForm">
+
+
+        <div class="form-row">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mobile Number *
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    maxlength="10"
+                    placeholder="Enter 10 digit mobile number"
+                    required
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <div class="form-row">
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Complaint Category *
+                </label>
+
+                <select
+                    id="category"
+                    required
+                >
+
+                    <option value="">
+                        -- Select Complaint Type --
+                    </option>
+
+                    <option value="Street Light">
+                        Street Light
+                    </option>
+
+                    <option value="Water Pipe Leak">
+                        Water Pipe Leak
+                    </option>
+
+                    <option value="Rain Water Drainage">
+                        Rain Water Drainage
+                    </option>
+
+                    <option value="Road Problem">
+                        Road Problem
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+
+        <div
+            id="otherProblemBox"
+            class="form-group"
+        >
+
+            <label>
+                Specify Other Problem *
+            </label>
+
+            <input
+                type="text"
+                id="otherProblem"
+                placeholder="Enter the problem"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Problem Location *
+            </label>
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Example: Gandhi Road, Chennai"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Complaint Description *
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Describe the problem in detail..."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Priority
+            </label>
+
+            <select id="priority">
+
+                <option value="Normal">
+                    Normal
+                </option>
+
+                <option value="High">
+                    High
+                </option>
+
+                <option value="Emergency">
+                    Emergency
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="submit-button"
+        >
+
+            Submit Complaint
+
+        </button>
+
+
+    </form>
+
+
+    <div
+        class="success-box"
+        id="successBox"
+    >
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h3>
+            Complaint Submitted Successfully!
+        </h3>
+
+        <p>
+            Your complaint has been registered.
+        </p>
+
+        <p>
+            Your Complaint ID is:
+        </p>
+
+        <div
+            class="complaint-number"
+            id="complaintNumber"
+        >
+        </div>
+
+        <p>
+            Please save this number.
+            You can use it to track your complaint.
+        </p>
+
+        <br>
+
+        <a
+            href="#tracking"
+            class="primary-button"
+        >
+            Track My Complaint
+        </a>
+
+    </div>
+
+
+    <div
+        class="error-box"
+        id="errorBox"
+    ></div>
+
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     TRACKING
+========================================================= -->
+
+<section
+    class="tracking-section"
+    id="tracking"
+>
+
+```
+<div class="section-title">
+
+    <h2>
+
+        Track Your
+
+        <span class="gradient-text">
+            Complaint
+        </span>
+
+    </h2>
+
+    <p>
+        Enter your Complaint ID to check its current status.
+    </p>
+
+</div>
+
+
+<div class="tracking-container">
+
+
+    <div class="tracking-input">
+
+        <input
+            type="text"
+            id="trackingId"
+            placeholder="Example: CMP123456"
+        >
+
+        <button
+            class="track-button"
+            onclick="trackComplaint()"
+        >
+            Track
+        </button>
+
+    </div>
+
+
+    <div
+        class="error-box"
+        id="trackingError"
+    ></div>
+
+
+    <div
+        class="tracking-result"
+        id="trackingResult"
+    >
+
+        <h3>
+            Complaint Details
+        </h3>
+
+
+        <p>
+
+            <strong>
+                Complaint ID:
+            </strong>
+
+            <span id="resultId"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Category:
+            </strong>
+
+            <span id="resultCategory"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Location:
+            </strong>
+
+            <span id="resultLocation"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Description:
+            </strong>
+
+            <span id="resultDescription"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Priority:
+            </strong>
+
+            <span id="resultPriority"></span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                Current Status:
+            </strong>
+
+            <span
+                class="status"
+                id="resultStatus"
+            ></span>
+
+        </p>
+
+
+        <div class="progress-container">
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+
+            <div class="progress-labels">
+
+                <span>
+                    Submitted
+                </span>
+
+                <span>
+                    Under Review
+                </span>
+
+                <span>
+                    In Progress
+                </span>
+
+                <span>
+                    Resolved
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <p>
+
+            <strong>
+                Administrator Note:
+            </strong>
+
+            <span id="resultNote"></span>
+
+        </p>
+
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+```
+<h3>
+    Citizen Complaint Management System
+</h3>
+
+<p>
+    Report problems. Track progress. Improve the community.
+</p>
+
+<p>
+    © 2026 Citizen Services
+</p>
+```
+
+</footer>
+
+<script>
+
+
+/* =========================================================
+   CATEGORY SELECTION
+========================================================= */
+
+function selectCategory(category) {
+
+    const categorySelect =
+        document.getElementById("category");
+
+    categorySelect.value =
+        category;
+
+    updateOtherField();
+
+    document
+        .getElementById("register")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+/* =========================================================
+   OTHER CATEGORY
+========================================================= */
+
+const categorySelect =
+    document.getElementById("category");
+
+categorySelect.addEventListener(
+    "change",
+    updateOtherField
+);
+
+
+function updateOtherField() {
+
+    const otherBox =
+        document.getElementById(
+            "otherProblemBox"
+        );
+
+    const otherInput =
+        document.getElementById(
+            "otherProblem"
+        );
+
+
+    if (
+        categorySelect.value === "Other"
+    ) {
+
+        otherBox.style.display =
+            "block";
+
+        otherInput.required =
+            true;
+
+    } else {
+
+        otherBox.style.display =
+            "none";
+
+        otherInput.required =
+            false;
+
+        otherInput.value =
+            "";
+    }
+}
+
+
+/* =========================================================
+   GENERATE COMPLAINT ID
+========================================================= */
+
+function generateComplaintID() {
+
+    const randomNumber =
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+    return "CMP" + randomNumber;
+}
+
+
+/* =========================================================
+   GET COMPLAINTS
+========================================================= */
+
+function getComplaints() {
+
+    return JSON.parse(
+        localStorage.getItem(
+            "citizenComplaints"
+        ) || "[]"
+    );
+}
+
+
+/* =========================================================
+   SAVE COMPLAINTS
+========================================================= */
+
+function saveComplaints(complaints) {
+
+    localStorage.setItem(
+        "citizenComplaints",
+        JSON.stringify(complaints)
+    );
+}
+
+
+/* =========================================================
+   SUBMIT COMPLAINT
+========================================================= */
+
+document
+    .getElementById("complaintForm")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+
+            const mobile =
+                document
+                    .getElementById("mobile")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const category =
+                document
+                    .getElementById("category")
+                    .value;
+
+
+            const otherProblem =
+                document
+                    .getElementById("otherProblem")
+                    .value
+                    .trim();
+
+
+            const location =
+                document
+                    .getElementById("location")
+                    .value
+                    .trim();
+
+
+            const description =
+                document
+                    .getElementById("description")
+                    .value
+                    .trim();
+
+
+            const priority =
+                document
+                    .getElementById("priority")
+                    .value;
+
+
+            const errorBox =
+                document
+                    .getElementById("errorBox");
+
+
+            errorBox.style.display =
+                "none";
+
+
+            if (
+                !/^\d{10}$/.test(mobile)
+            ) {
+
+                errorBox.textContent =
+                    "Please enter a valid 10 digit mobile number.";
+
+                errorBox.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            if (
+                category === "Other" &&
+                otherProblem === ""
+            ) {
+
+                errorBox.textContent =
+                    "Please specify the other problem.";
+
+                errorBox.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            const complaintID =
+                generateComplaintID();
+
+
+            const complaint = {
+
+                id:
+                    complaintID,
+
+                name:
+                    name,
+
+                mobile:
+                    mobile,
+
+                email:
+                    email,
+
+                category:
+                    category,
+
+                otherProblem:
+                    otherProblem,
+
+                location:
+                    location,
+
+                description:
+                    description,
+
+                priority:
+                    priority,
+
+                status:
+                    "Submitted",
+
+                note:
+                    "Your complaint has been received and is waiting for review.",
+
+                created:
+                    new Date()
+                        .toISOString()
+            };
+
+
+            const complaints =
+                getComplaints();
+
+
+            complaints.push(
+                complaint
+            );
+
+
+            saveComplaints(
+                complaints
+            );
+
+
+            document
+                .getElementById(
+                    "complaintNumber"
+                )
+                .textContent =
+                complaintID;
+
+
+            document
+                .getElementById(
+                    "successBox"
+                )
+                .style.display =
+                "block";
+
+
+            document
+                .getElementById(
+                    "complaintForm"
+                )
+                .reset();
+
+
+            updateOtherField();
+
+
+            document
+                .getElementById(
+                    "successBox"
+                )
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+        }
+    );
+
+
+/* =========================================================
+   TRACK COMPLAINT
+========================================================= */
+
+function trackComplaint() {
+
+    const input =
+        document
+            .getElementById(
+                "trackingId"
+            )
+            .value
+            .trim()
+            .toUpperCase();
+
+
+    const error =
+        document
+            .getElementById(
+                "trackingError"
+            );
+
+
+    const result =
+        document
+            .getElementById(
+                "trackingResult"
+            );
+
+
+    error.style.display =
+        "none";
+
+    result.style.display =
+        "none";
+
+
+    if (input === "") {
+
+        error.textContent =
+            "Please enter your Complaint ID.";
+
+        error.style.display =
+            "block";
+
+        return;
+    }
+
+
+    const complaints =
+        getComplaints();
+
+
+    const complaint =
+        complaints.find(
+            function(item) {
+
+                return item.id === input;
+
+            }
+        );
+
+
+    if (!complaint) {
+
+        error.textContent =
+            "Complaint ID not found. Please check the ID and try again.";
+
+        error.style.display =
+            "block";
+
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "resultId"
+        )
+        .textContent =
+        complaint.id;
+
+
+    document
+        .getElementById(
+            "resultCategory"
+        )
+        .textContent =
+        complaint.category +
+        (
+            complaint.otherProblem
+                ? " - " +
+                  complaint.otherProblem
+                : ""
+        );
+
+
+    document
+        .getElementById(
+            "resultLocation"
+        )
+        .textContent =
+        complaint.location;
+
+
+    document
+        .getElementById(
+            "resultDescription"
+        )
+        .textContent =
+        complaint.description;
+
+
+    document
+        .getElementById(
+            "resultPriority"
+        )
+        .textContent =
+        complaint.priority;
+
+
+    document
+        .getElementById(
+            "resultStatus"
+        )
+        .textContent =
+        complaint.status;
+
+
+    document
+        .getElementById(
+            "resultNote"
+        )
+        .textContent =
+        complaint.note;
+
+
+    updateProgress(
+        complaint.status
+    );
+
+
+    result.style.display =
+        "block";
+
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(status) {
+
+    const progress =
+        document
+            .getElementById(
+                "progressFill"
+            );
+
+
+    let width =
+        "25%";
+
+
+    if (
+        status ===
+        "Under Review"
+    ) {
+
+        width =
+            "50%";
+    }
+
+
+    if (
+        status ===
+        "In Progress"
+    ) {
+
+        width =
+            "75%";
+    }
+
+
+    if (
+        status ===
+        "Resolved"
+    ) {
+
+        width =
+            "100%";
+    }
+
+
+    if (
+        status ===
+        "Rejected"
+    ) {
+
+        width =
+            "100%";
+    }
+
+
+    progress.style.width =
+        width;
+}
+
+
+/* =========================================================
+   ENTER KEY FOR TRACKING
+========================================================= */
+
+document
+    .getElementById(
+        "trackingId"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                trackComplaint();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+</body>
+</html>
+
+
